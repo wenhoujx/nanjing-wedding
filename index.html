@@ -20,13 +20,27 @@
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
     <script src="assets/js/tailwind.custom.js"></script>
     <link rel="stylesheet" href="assets/css/tailwind.custom.css" />
+    <script>
+        const currentSeconds = new Date().getTime() / 1000;
+        const targetSeconds = 1683100800;
+        let counter = targetSeconds - currentSeconds;
+        setInterval(() => {
+            if (counter > 0) {
+                counter--
+            }
+            document.getElementById('cd-days').style.setProperty('--value', Math.floor(counter / (3600 * 24)))
+            document.getElementById('cd-hours').style.setProperty('--value', Math.floor(counter / 3600) % 24)
+            document.getElementById('cd-minutes').style.setProperty('--value', Math.floor(counter / 60) % 60)
+            document.getElementById('cd-seconds').style.setProperty('--value', counter % 60)
+        }, 1000)
+    </script>
 </head>
 
 <body>
     <!-- component -->
     <div class="mx-auto">
         <!-- Content -->
-        <article >
+        <article>
             <div class="hero min-h-screen" style="background-image: url(/public/imgs/engage-2.jpg); ">
                 <div class="hero-overlay bg-opacity-60"></div>
                 <div class="hero-content text-center text-neutral-content">
@@ -34,6 +48,28 @@
                         <h1 class="mb-5 text-5xl font-bold">我们结婚啦</h1>
                         <p class="mb-5 text-2xl">经过了三年的相识相爱, </p>
                         <p class="mb-5 text-2xl"> 我们要结婚啦. </p>
+                        <div class="grid grid-flow-col gap-5 text-center auto-cols-max flex justify-center my-6">
+                            <div class="flex flex-col">
+                                <span class="countdown font-mono text-5xl">
+                                    <span id="cd-days" style="--value:00;"></span>
+                                </span> days
+                            </div>
+                            <div class="flex flex-col">
+                                <span class="countdown font-mono text-5xl">
+                                    <span id="cd-hours" style="--value:00;"></span>
+                                </span> hours
+                            </div>
+                            <div class="flex flex-col">
+                                <span class="countdown font-mono text-5xl">
+                                    <span id="cd-minutes" style="--value:00;"></span>
+                                </span> min
+                            </div>
+                            <div class="flex flex-col">
+                                <span class="countdown font-mono text-5xl">
+                                    <span id="cd-seconds" style="--value:00;"></span>
+                                </span> sec
+                            </div>
+                        </div>
                         <div class="flex justify-center">
                             <a role="button" class="btn glass btn-link" href="#wedding">
                                 <span class="iconify" data-icon="mdi:cards-heart" style="color: red;"></span>
@@ -48,7 +84,8 @@
                     <h2 class="text-center font-bold text-3xl m-12">婚礼</h2>
                     <div class="w-full flex flex-col items-center">
                         <p class="mb-5 text-2xl text-center">诚邀您和您的家人, <br /> 参加我们的婚礼, <br /> 见证我们的爱情. </p>
-                        <img src="/public/imgs/nanjing-stone-lion.jpg" class="rounded" alt="technology" />
+                        <img src="/public/imgs/complete-image.jpg" class="rounded" alt="technology"
+                            style="max-height: 600px;" />
                         <div class="p-4 pl-0">
                             <h2 class="font-bold text-2xl text-white line-clamp-2"> 地点: 南京格里高利 </h2>
                             <p class="text-gray-300 mt-2 line-clamp-3"> 日期: 2024.5.3. </p>
@@ -66,19 +103,42 @@
                         </div>
                     </div> -->
                 </section>
-                <!-- end recent posts -->
-                <!-- medium -->
                 <section id="stories">
                     <h2 class="font-bold text-center text-4xl m-12">我们的故事</h2>
                     <div class="hero-content flex-col lg:flex-row">
-                        <img src="/public/imgs/first-met.jpeg" class="max-w-sm rounded-lg shadow-2xl" />
+                        <div class="carousel carousel-center max-w-lg p-4 space-x-8 bg-neutral rounded-box">
+                            <div id="slide11" class="carousel-item relative w-full">
+                                <img src="/public/imgs/first-hike.jpeg" class="w-full" />
+                                <div
+                                    class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+                                    <a href="#slide13" class="btn btn-circle">❮</a>
+                                    <a href="#slide12" class="btn btn-circle">❯</a>
+                                </div>
+                            </div>
+                            <div id="slide12" class="carousel-item relative w-full">
+                                <img src="/public/imgs/art.JPG" class="w-full" />
+                                <div
+                                    class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+                                    <a href="#slide11" class="btn btn-circle">❮</a>
+                                    <a href="#slide13" class="btn btn-circle">❯</a>
+                                </div>
+                            </div>
+                            <div id="slide13" class="carousel-item relative w-full">
+                                <img src="/public/imgs/painting.jpg" class="w-full" />
+                                <div
+                                    class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+                                    <a href="#slide12" class="btn btn-circle">❮</a>
+                                    <a href="#slide11" class="btn btn-circle">❯</a>
+                                </div>
+                            </div>
+                        </div>
                         <div class="text-center">
                             <h1 class="text-3xl font-bold">我们的相遇!</h1>
-                            <p class="py-6">2020 初春我们在朋友的介绍下相识 从此开启了在异国他乡的相知相守. </p>
+                            <p class="py-6">2020 初春我们因为共同的兴趣爱好而相识, <br /> 从此开启了在异国他乡的相知相守. </p>
                         </div>
                     </div>
                     <div class="hero-content flex-col lg:flex-row-reverse">
-                        <div class="carousel carousel-center max-w-md p-4 space-x-8 bg-neutral rounded-box">
+                        <div class="carousel carousel-center max-w-lg p-4 space-x-8 bg-neutral rounded-box">
                             <div id="slide1" class="carousel-item relative w-full">
                                 <img src="/public/imgs/denver.jpg" class="w-full" />
                                 <div
@@ -108,26 +168,69 @@
                                 <div
                                     class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
                                     <a href="#slide3" class="btn btn-circle">❮</a>
+                                    <a href="#slide5" class="btn btn-circle">❯</a>
+                                </div>
+                            </div>
+                            <div id="slide5" class="carousel-item relative w-full">
+                                <img src="/public/imgs/denver-independence-pass.jpg" class="w-full"
+                                    style="object-fit: cover;" />
+                                <div
+                                    class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+                                    <a href="#slide4" class="btn btn-circle">❮</a>
+                                    <a href="#slide6" class="btn btn-circle">❯</a>
+                                </div>
+                            </div>
+                            <div id="slide6" class="carousel-item relative w-full">
+                                <img src="/public/imgs/cherr-blossom-couple.JPG" class="w-full"
+                                    style="object-fit: contain;" />
+                                <div
+                                    class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+                                    <a href="#slide5" class="btn btn-circle">❮</a>
                                     <a href="#slide20" class="btn btn-circle">❯</a>
                                 </div>
                             </div>
                             <div id="slide20" class="carousel-item relative w-full">
-                                <img src="/public/imgs/maine-hiking.jpeg" class="w-full" />
+                                <img src="/public/imgs/seattle-beach.JPG" class="w-full" style="object-fit: cover;" />
                                 <div
                                     class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                                    <a href="#slide4" class="btn btn-circle">❮</a>
+                                    <a href="#slide6" class="btn btn-circle">❮</a>
                                     <a href="#slide1" class="btn btn-circle">❯</a>
                                 </div>
                             </div>
                         </div>
                         <div class="text-center">
                             <h1 class="text-3xl font-bold">我们的相爱</h1>
-                            <p class="py-6">之后的两年里我们游历了很多地方, 丹佛, 西雅图, 迪士尼, 巴塞罗那, 冰岛. 分享了彼此的生活, 兴趣, 成为了彼此生命中的最重要的那一半.
+                            <p class="py-6">之后的三年里我们游历了很多地方, 丹佛, 西雅图, 迪士尼, 巴塞罗那, 冰岛. 分享了彼此的生活, 兴趣, 成为了彼此生命中的最重要的那一半.
                             </p>
                         </div>
                     </div>
                     <div class="hero-content flex-col lg:flex-row mb-24">
-                        <img src="/public/imgs/engage.jpeg" class="max-w-sm rounded-lg shadow-2xl" />
+                        <div class="carousel carousel-center max-w-lg p-4 space-x-8 bg-neutral rounded-box">
+                            <div id="slide31" class="carousel-item relative w-full">
+                                <img src="/public/imgs/engage.jpg" class="w-full" />
+                                <div
+                                    class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+                                    <a href="#slide33" class="btn btn-circle">❮</a>
+                                    <a href="#slide32" class="btn btn-circle">❯</a>
+                                </div>
+                            </div>
+                            <div id="slide32" class="carousel-item relative w-full">
+                                <img src="/public/imgs/propose.jpeg" class="w-full" />
+                                <div
+                                    class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+                                    <a href="#slide31" class="btn btn-circle">❮</a>
+                                    <a href="#slide33" class="btn btn-circle">❯</a>
+                                </div>
+                            </div>
+                            <div id="slide33" class="carousel-item relative w-full">
+                                <img src="/public/imgs/engage-2.jpg" class="w-full" />
+                                <div
+                                    class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+                                    <a href="#slide32" class="btn btn-circle">❮</a>
+                                    <a href="#slide31" class="btn btn-circle">❯</a>
+                                </div>
+                            </div>
+                        </div>
                         <div class="text-center">
                             <h1 class="text-3xl font-b old">订婚!</h1>
                             <p class="py-6">2022 在朋友的祝福下我们在我们第一次相遇的地方订婚了. <br /> 那天为我们的感情开启了新的篇章. <br /> 执子之手 <br />
